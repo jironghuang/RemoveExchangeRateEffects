@@ -191,12 +191,13 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
 }
 
 
-# ###########################Demonstration of OOP version for exchange rate effects#######################
+###########################Demonstration of OOP version for exchange rate effects#######################
 # sp_exch_rate_pair = "USDSGD=X"
 # ap_start_date <- as.Date("1950-01-01")
 # ap_end_date <- as.Date("2020-10-01")
 # np_mthly_yearly = "monthly"  #alternatively this could be yearly
-# dp_dates_investment_value = read.csv("Data/Input/TSLA.csv")
+# data(tsla)
+# dp_dates_investment_value = tsla
 #
 # o_exchRate_effect <- exchRate_effect_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 # o_exchRate_effect$get_portfolio()
