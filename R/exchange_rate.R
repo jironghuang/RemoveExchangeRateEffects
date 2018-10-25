@@ -155,6 +155,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
     convert_to_fgn_currency = function(){
      methd$integrate_exchRate_portfolio()
      d_exchRate_portfolio$fgn_value = d_exchRate_portfolio$value / d_exchRate_portfolio$Adj_Close
+     names(d_exchRate_portfolio)[which(names(d_exchRate_portfolio) == "Adj_Close")] = "exchange_rate"
      return(assign("d_exchRate_portfolio", d_exchRate_portfolio, thisEnv))
     },
 
@@ -198,8 +199,8 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
 # ap_start_date <- as.Date("1950-01-01")
 # ap_end_date <- as.Date("2020-10-01")
 # np_mthly_yearly = "monthly"  #alternatively this could be yearly
-# data(tsla)
-# dp_dates_investment_value = tsla
+# data(instrument)
+# dp_dates_investment_value = instrument
 #
 # o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 # o_exchRate_effect$get_portfolio()
