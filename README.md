@@ -2,7 +2,7 @@
 
 If you are someone with a stake in foreign positions, this package I wrote here may be a useful tool to help you understand the impact of foreign currency on your positions. For instance,
 
-- If you are an investor, you may use it to analyze impact of exchange rate on your invesment positions.
+- If you are an investor, you may use it to analyze impact of exchange rate on your investment positions.
 - If you are in the treasury department, you may wish to analyze the impact of exchange rates on your bonds.
 - If you are in the finance department, you could analyze the exchange rate impact on your foreign revenue.
 
@@ -20,11 +20,14 @@ If you look at the value at the end of the period (Oct 2018), you would notice t
 library(devtools)
 install_github("jironghuang/RemoveExchangeRateEffects")
 library(RemoveExchangeRateEffects)
-sp_exch_rate_pair = "USDSGD=X"
-ap_start_date <- as.Date("1950-01-01")
-ap_end_date <- as.Date("2020-10-01")
+
+sp_exch_rate_pair = "USDSGD=X"  #exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"
+
+ap_start_date <- as.Date("1950-01-01")  #starting date of portfolio e.g. 2017-10-01
+ap_end_date <- as.Date("2020-10-01") #ending date of portfolio e.g. 2020-10-01. If you include a date beyond current date, the function will use the current date instead
 np_mthly_yearly = "monthly"  #alternatively this could be "yearly""
-data(instrument)
+
+data(instrument) #example dataset that I included in this package
 dp_dates_investment_value = instrument
 o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 o_exchRate_effect$get_portfolio()

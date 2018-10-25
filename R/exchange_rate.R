@@ -3,7 +3,7 @@
 #' This function allows you to do strip out exchange effects (e.g. investment portfolio, revenue)
 #' Idea is to first reverse all the SGD denominated value over time into foreign currency value. Then apply a constant exchange rate at beginning of the period over time
 #' @param sp_exch_rate_pair exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"
-#' @param ap_start_date starting date of portfolio e.g. 1950-01-01
+#' @param ap_start_date starting date of portfolio e.g. 2017-10-01
 #' @param ap_end_date ending date of portfolio e.g. 2020-10-01. If you include a date beyond current date, the function will use the current date instead
 #' @param np_mthly_yearly #Decomposition at monthly or yearly level
 #' @param dp_dates_investment_value #data frame of date and investment values
