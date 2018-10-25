@@ -29,7 +29,8 @@ If you look at the value at the end of the period (Oct 2018), you would notice t
 >
 > o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 > o_exchRate_effect$get_portfolio()
-         value_in_SGD Adj_Close fgn_value local_static_value exch_rate_impact
+Date         value_in_SGD Adj_Close fgn_value local_static_value exch_rate_impact
+>
 Oct 2017     331.53   1.36010  243.7541           331.5300        0.0000000
 Nov 2017     308.85   1.34670  229.3384           311.9231       -3.0731344
 Dec 2017     311.35   1.33780  232.7328           316.5399       -5.1899425
