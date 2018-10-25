@@ -8,9 +8,11 @@
 #' @param ap_end_date #ending date of portfolio (include a default here)
 #' @param np_mthly_yearly #Decomposition at monthly or yearly level
 #' @param dp_dates_investment_value #data frame of date and investment values
-#' @return object
+#' @keywords exchangeRate
+#' @export
+#' @examples
 
-exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value){
+exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value){
 
   thisEnv <- environment()
 
@@ -101,9 +103,9 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
     #Get exchange rate with date range. Starting date and ending date
     get_sp_exch_rate  = function(){
 
-      getSymbols(sp_exch_rate_pair, from = ap_start_date, to = ap_end_date)
+      quantmod::getSymbols(sp_exch_rate_pair, from = ap_start_date, to = ap_end_date)
       sp_exch_rate_pair = gsub("\\^", "", sp_exch_rate_pair)
-      ap_exch_rate = as.xts(get(sp_exch_rate_pair))
+      ap_exch_rate = xts::as.xts(get(sp_exch_rate_pair))
 
       return(assign("ap_exch_rate", ap_exch_rate, thisEnv))
     },
@@ -114,9 +116,9 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
       methd$get_sp_exch_rate()
 
       if(np_mthly_yearly == "monthly"){
-        ap_exch_rate = to.monthly(ap_exch_rate)
+        ap_exch_rate = xts::to.monthly(ap_exch_rate)
       }else if(np_mthly_yearly == "yearly"){
-        ap_exch_rate = to.yearly(ap_exch_rate)
+        ap_exch_rate = xts::to.yearly(ap_exch_rate)
       }
 
       ap_exch_rate = ap_exch_rate[, 6]
@@ -128,12 +130,12 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
     # https://stackoverflow.com/questions/29046311/how-to-convert-data-frame-into-time-series-in-r
     transform_portfolio = function(){
       if(np_mthly_yearly == "monthly"){
-        dp_dates_investment_value = xts(dp_dates_investment_value[,-1], order.by = as.Date(dp_dates_investment_value[,1], "%Y-%m-%d"))
-        dp_dates_investment_value = to.monthly(dp_dates_investment_value)
+        dp_dates_investment_value = xts::xts(dp_dates_investment_value[,-1], order.by = as.Date(dp_dates_investment_value[,1], "%Y-%m-%d"))
+        dp_dates_investment_value = xts::to.monthly(dp_dates_investment_value)
 
       }else if(np_mthly_yearly == "yearly"){
-        dp_dates_investment_value = xts(dp_dates_investment_value[,-1], order.by = as.Date(dp_dates_investment_value[,1], "%Y-%m-%d"))
-        dp_dates_investment_value = to.yearly(dp_dates_investment_value)
+        dp_dates_investment_value = xts::xts(dp_dates_investment_value[,-1], order.by = as.Date(dp_dates_investment_value[,1], "%Y-%m-%d"))
+        dp_dates_investment_value = xts::to.yearly(dp_dates_investment_value)
       }
 
       dp_dates_investment_value = dp_dates_investment_value[, 4]
@@ -183,10 +185,10 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
   )
 
   ## Define the value of the list within the current environment.
-  assign('this', exchRate_effect_decomposition, envir = thisEnv)
+  assign('this', exchange_rate_decomposition, envir = thisEnv)
 
   ## Set the name for the class
-  class(methd) <- append(class(methd),"exchRate_effect_decomposition")
+  class(methd) <- append(class(methd),"exchange_rate_decomposition")
   return(methd)
 }
 
@@ -199,6 +201,6 @@ exchRate_effect_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_e
 # data(tsla)
 # dp_dates_investment_value = tsla
 #
-# o_exchRate_effect <- exchRate_effect_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
+# o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 # o_exchRate_effect$get_portfolio()
 # o_exchRate_effect$get_diff_portfolio_value()

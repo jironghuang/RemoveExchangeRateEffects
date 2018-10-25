@@ -1,12 +1,13 @@
 Package: RemoveExchangeRateEffects
-Title: What the Package Does (one line, title case)
+Title: Dcompostion an instrument into exchange rate and non exchange rate effects
 Version: 0.0.0.9000
-Authors@R: person("First", "Last", email = "first.last@example.com", role = c("aut", "cre"))
-Description: What the package does (one paragraph).
+Authors@R: person("Jirong", "Huang", email = "jironghuang88@gmail.com", role = c("aut", "cre"))
+Description: It compares a portfolio or instrument fixed at an exchange rate vis a vis onee that varies with exchange rate over time. Essentially - to decompostion a portfolio into exchange rate and non exchange rate effects
 Depends: R (>= 3.4.0)
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
 RoxygenNote: 6.1.0.9000
 Imports:
-    quantmod
+    quantmod,
+    xts
