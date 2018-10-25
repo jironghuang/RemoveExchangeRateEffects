@@ -15,7 +15,7 @@ In summary, what the example does below is to decompose 1 Tesla position in SGD 
 If you look at the value at the end of the period (Oct 2018), you would notice that the value in SGD fell from 331 to 261. From the perspective of a Singaporean local - through this package -  we can understand that the appreciation in USD negate the fall in value by 4 SGD.       
 
 ## Quick example in R codes
-
+'''
 library(devtools)
 install_github("jironghuang/RemoveExchangeRateEffects")
 library(RemoveExchangeRateEffects)
@@ -27,7 +27,8 @@ data(instrument)
 dp_dates_investment_value = instrument
 o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 o_exchRate_effect$get_portfolio()
-
+'''
+'''
           value Adj_Close fgn_value local_static_value exch_rate_impact
 Oct 2017 331.53   1.36010  243.7541           331.5300        0.0000000
 Nov 2017 308.85   1.34670  229.3384           311.9231       -3.0731344
@@ -45,4 +46,4 @@ Oct 2018 260.95   1.38080  188.9847           257.0380        3.9119824
 
 o_exchRate_effect$get_diff_portfolio_value()
 [1] -3.911982
-
+'''
