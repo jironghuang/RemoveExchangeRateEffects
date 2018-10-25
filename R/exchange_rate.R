@@ -9,7 +9,6 @@
 #' @param dp_dates_investment_value #data frame of date and investment values
 #' @keywords exchangeRate
 #' @export
-#' @examples
 
 exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value){
 
@@ -194,14 +193,15 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
 }
 
 
-# ###########################Demonstration of OOP version for exchange rate effects#######################
+###########################Demonstration of OOP version for exchange rate effects#######################
+# library(RemoveExchangeRateEffects)
 # sp_exch_rate_pair = "USDSGD=X"
 # ap_start_date <- as.Date("2017-10-01")
 # ap_end_date <- as.Date("2020-10-01")
 # np_mthly_yearly = "monthly"  #alternatively this could be yearly
 # data(instrument)
-# dp_dates_investment_value = instrument
+# dp_dates_investment_value = tsla
 #
-# o_exchRate_effect <- exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
+# o_exchRate_effect <- RemoveExchangeRateEffects::exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 # o_exchRate_effect$get_portfolio()
 # o_exchRate_effect$get_diff_portfolio_value()

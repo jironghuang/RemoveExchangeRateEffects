@@ -8,11 +8,11 @@ exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date,
   np_mthly_yearly, dp_dates_investment_value)
 }
 \arguments{
-\item{sp_exch_rate_pair}{#exchange rate pair}
+\item{sp_exch_rate_pair}{exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"}
 
-\item{ap_start_date}{#starting date of portfolio}
+\item{ap_start_date}{starting date of portfolio e.g. 2017-10-01}
 
-\item{ap_end_date}{#ending date of portfolio (include a default here)}
+\item{ap_end_date}{ending date of portfolio e.g. 2020-10-01. If you include a date beyond current date, the function will use the current date instead}
 
 \item{np_mthly_yearly}{#Decomposition at monthly or yearly level}
 
@@ -21,6 +21,5 @@ exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date,
 \description{
 This function allows you to do strip out exchange effects (e.g. investment portfolio, revenue)
 Idea is to first reverse all the SGD denominated value over time into foreign currency value. Then apply a constant exchange rate at beginning of the period over time
-Need to find a way to merge dp_dates_investment_value into the frequency of dates (through month or year)
 }
 \keyword{exchangeRate}
