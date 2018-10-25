@@ -23,7 +23,7 @@ library(RemoveExchangeRateEffects)
 
 sp_exch_rate_pair = "USDSGD=X"  #exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"
 
-ap_start_date <- as.Date("1950-01-01")  #starting date of portfolio e.g. 2017-10-01
+ap_start_date <- as.Date("2017-10-01")  #starting date of portfolio e.g. 2017-10-01
 ap_end_date <- as.Date("2020-10-01") #ending date of portfolio e.g. 2020-10-01. If you include a date beyond current date, the function will use the current date instead
 np_mthly_yearly = "monthly"  #alternatively this could be "yearly""
 
