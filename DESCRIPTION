@@ -1,5 +1,5 @@
 Package: RemoveExchangeRateEffects
-Title: Dcompostion an instrument into exchange rate and non exchange rate effects
+Title: Decompose an instrument into exchange rate and non exchange rate effects
 Version: 0.0.0.9000
 Authors@R: person("Jirong", "Huang", email = "jironghuang88@gmail.com", role = c("aut", "cre"))
 Description: It compares a portfolio or instrument fixed at an exchange rate vis a vis onee that varies with exchange rate over time. Essentially - to decompostion a portfolio into exchange rate and non exchange rate effects

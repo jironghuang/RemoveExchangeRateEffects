@@ -2,10 +2,9 @@
 #'
 #' This function allows you to do strip out exchange effects (e.g. investment portfolio, revenue)
 #' Idea is to first reverse all the SGD denominated value over time into foreign currency value. Then apply a constant exchange rate at beginning of the period over time
-#' Need to find a way to merge dp_dates_investment_value into the frequency of dates (through month or year)
-#' @param sp_exch_rate_pair #exchange rate pair
-#' @param ap_start_date #starting date of portfolio
-#' @param ap_end_date #ending date of portfolio (include a default here)
+#' @param sp_exch_rate_pair exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"
+#' @param ap_start_date starting date of portfolio e.g. 1950-01-01
+#' @param ap_end_date ending date of portfolio e.g. 2020-10-01. If you include a date beyond current date, the function will use the current date instead
 #' @param np_mthly_yearly #Decomposition at monthly or yearly level
 #' @param dp_dates_investment_value #data frame of date and investment values
 #' @keywords exchangeRate
@@ -163,6 +162,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
     fix_exch_rate = function(portfolio, year, month = NULL){
       methd$convert_to_fgn_currency()
       d_exchRate_portfolio$local_static_value = d_exchRate_portfolio$fgn_value * as.numeric(d_exchRate_portfolio$Adj_Close[1])
+      d_exchRate_portfolio$exch_rate_impact = d_exchRate_portfolio$value - d_exchRate_portfolio$local_static_value
       return(assign("d_exchRate_portfolio", d_exchRate_portfolio, thisEnv))
     },
 
@@ -193,7 +193,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
 }
 
 
-###########################Demonstration of OOP version for exchange rate effects#######################
+# ###########################Demonstration of OOP version for exchange rate effects#######################
 # sp_exch_rate_pair = "USDSGD=X"
 # ap_start_date <- as.Date("1950-01-01")
 # ap_end_date <- as.Date("2020-10-01")
