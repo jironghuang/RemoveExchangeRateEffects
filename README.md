@@ -10,7 +10,7 @@ To start using this package, you may first install the devtools package and exec
 
 You may follow the example to better understand how this package works. 
 
-In summary, what the example does below is to decompose 1 Tesla position in SGD - from the perspective of someone staying in Singapore - into local value (i.e if I keep the exchange rate constant at the start of the period) and the residual exchange rate impact. 
+In summary, what the example does below is to decompose 1 instrument position in SGD (column value) - from the perspective of someone staying in Singapore - into local static value (i.e if I keep the exchange rate constant at the start of the period) and the residual exchange rate impact. 
 
 If you look at the value at the end of the period (Oct 2018), you would notice that the value in SGD fell from 331 to 261. From the perspective of a Singaporean local - through this package -  we can understand that the appreciation in USD negate the fall in value by 4 SGD.       
 
@@ -31,7 +31,7 @@ o_exchRate_effect$get_portfolio()
 ```
 
 ```
-          value Adj_Close fgn_value local_static_value exch_rate_impact
+      value_in_sgd Adj_Close fgn_value local_static_value exch_rate_impact
 Oct 2017 331.53   1.36010  243.7541           331.5300        0.0000000
 Nov 2017 308.85   1.34670  229.3384           311.9231       -3.0731344
 Dec 2017 311.35   1.33780  232.7328           316.5399       -5.1899425
