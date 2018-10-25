@@ -34,7 +34,7 @@ o_exchRate_effect$get_portfolio()
 ```
 
 ```
-      value_in_sgd Adj_Close fgn_value local_static_value exch_rate_impact
+    value_in_sgd exchange_rate fgn_value local_static_value exch_rate_impact
 Oct 2017 331.53   1.36010  243.7541           331.5300        0.0000000
 Nov 2017 308.85   1.34670  229.3384           311.9231       -3.0731344
 Dec 2017 311.35   1.33780  232.7328           316.5399       -5.1899425

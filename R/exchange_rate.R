@@ -162,7 +162,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
     #Fix portfolio at a exchange rate
     fix_exch_rate = function(portfolio, year, month = NULL){
       methd$convert_to_fgn_currency()
-      d_exchRate_portfolio$local_static_value = d_exchRate_portfolio$fgn_value * as.numeric(d_exchRate_portfolio$Adj_Close[1])
+      d_exchRate_portfolio$local_static_value = d_exchRate_portfolio$fgn_value * as.numeric(d_exchRate_portfolio$exchange_rate[1])
       d_exchRate_portfolio$exch_rate_impact = d_exchRate_portfolio$value - d_exchRate_portfolio$local_static_value
       return(assign("d_exchRate_portfolio", d_exchRate_portfolio, thisEnv))
     },
@@ -178,7 +178,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
         methd$get_portfolio()
       }
 
-       return(as.numeric(d_exchRate_portfolio$local_static_value[nrow(d_exchRate_portfolio)]) -
+       return(-as.numeric(d_exchRate_portfolio$local_static_value[nrow(d_exchRate_portfolio)]) +
                as.numeric(d_exchRate_portfolio$value[nrow(d_exchRate_portfolio)]))
     }
 
