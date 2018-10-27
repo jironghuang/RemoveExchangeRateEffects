@@ -159,7 +159,7 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
     },
 
     #Fix portfolio at a exchange rate
-    fix_exch_rate = function(portfolio, year, month = NULL){
+    fix_exch_rate = function(){
       methd$convert_to_fgn_currency()
       d_exchRate_portfolio$local_static_value = d_exchRate_portfolio$fgn_value * as.numeric(d_exchRate_portfolio$exchange_rate[1])
       d_exchRate_portfolio$exch_rate_impact = d_exchRate_portfolio$value - d_exchRate_portfolio$local_static_value
@@ -192,16 +192,124 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
   return(methd)
 }
 
+###############################################Multiple exchange rate decomposition at once##########################33
+#Decomposing multiple instruments at once using lapply
+#' @param np_number_of_instruments  number of instruments in a portfolio
+#' @keywords exchangeRate
+#' @export
 
-###########################Demonstration of OOP version for exchange rate effects#######################
-# library(RemoveExchangeRateEffects)
-# sp_exch_rate_pair = "USDSGD=X"
-# ap_start_date <- as.Date("2017-10-01")
-# ap_end_date <- as.Date("2020-10-01")
-# np_mthly_yearly = "monthly"  #alternatively this could be yearly
+multiple_exchange_rate_decomposition = function(np_number_of_instruments){
+
+  thisEnv <- environment()
+
+  #Initialize arrays and lists here
+  sa_exch_rate_pair = NULL
+  sa_start_date = NULL
+  sa_end_date = NULL
+  sa_mthly_yearly = NULL
+  dl_dates_investment_value = NULL
+
+  dl_portfolio = NULL
+
+  methd <- list(
+
+    ## Define the environment where this list is defined so
+    ## that I can refer to it later.
+    thisEnv = thisEnv,
+
+    ## Define the accessors for the data fields.
+    getEnv = function()
+    {
+      return(get("thisEnv",thisEnv))
+    },
+
+    #Add array of exchange rate pairs
+    set_sa_exch_rate_pair = function(sap_exch_rate_pair){
+      return(assign("sa_exch_rate_pair", sap_exch_rate_pair, thisEnv))
+    },
+
+    get_sa_exch_rate_pair = function(){
+      return(get("sa_exch_rate_pair", sa_exch_rate_pair, thisEnv))
+    },
+
+    #Add array of starting dates
+    set_sa_start_date = function(sap_start_date){
+      return(assign("sa_start_date", sap_start_date, thisEnv))
+    },
+
+    #Add array of ending dates
+    set_sa_end_date = function(sap_end_date){
+      return(assign("sa_end_date", sap_end_date, thisEnv))
+    },
+
+    #Add array of monthly or yearly options
+    set_sa_mthly_yearly = function(sap_mthly_yearly){
+      return(assign("sa_mthly_yearly", sap_mthly_yearly, thisEnv))
+    },
+
+    #Add list of data framess
+    set_dl_dates_investment_value = function(dlp_dates_investment_value){
+      return(assign("dl_dates_investment_value", dlp_dates_investment_value, thisEnv))
+    },
+
+    #Create an indexed based oop. But only return the dataframe. This works!
+    index_exchange_rate_decomposition = function(np_index){
+      o_exchRate_effect = exchange_rate_decomposition(sa_exch_rate_pair[np_index],
+                                                      sa_start_date[np_index],
+                                                      sa_end_date[np_index],
+                                                      sa_mthly_yearly[np_index],
+                                                      dl_dates_investment_value[[np_index]])
+
+      dInstrument = o_exchRate_effect$get_portfolio()
+      return(dInstrument)
+    },
+
+    #Create lapply version of index_exchange rate decomposition to return list of objects
+    multiple_index_exchange_rate_decomposition = function(){
+
+      #Rename methd$index_exchange_rate_decomposition() as a new function
+      dl_o_portfolio = lapply(1:np_number_of_instruments, methd[[which(names(methd) == "index_exchange_rate_decomposition")]])
+      return(assign("dl_portfolio", dl_o_portfolio, thisEnv))
+    },
+
+    #get portfolio
+    get_full_decomposition = function(){
+      methd$multiple_index_exchange_rate_decomposition()
+      return(get("dl_portfolio", dl_portfolio, thisEnv))
+    }
+
+
+  )#end of list
+
+  ## Define the value of the list within the current environment.
+  assign('this', multiple_exchange_rate_decomposition, envir = thisEnv)
+
+  ## Set the name for the class
+  class(methd) <- append(class(methd),"multiple_exchange_rate_decomposition")
+  return(methd)
+
+}
+
+
 # data(instrument)
-# dp_dates_investment_value = tsla
 #
-# o_exchRate_effect <- RemoveExchangeRateEffects::exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
-# o_exchRate_effect$get_portfolio()
-# o_exchRate_effect$get_diff_portfolio_value()
+# er = c("USDSGD=X", "GBPSGD=X")
+# start_date = c("2017-10-01", "2017-10-01")
+# end_date = c("2020-10-01", "2020-10-01")
+# freq = c("monthly", "monthly")
+# dat = list(tsla, tsla)
+#
+# a = index_exchange_rate_decomposition(1,1,1,1,1)
+# a$get_portfolio()
+#
+# o_exchRate_effect <- multiple_exchange_rate_decomposition(2)
+# o_exchRate_effect$set_sa_exch_rate_pair(er)
+# o_exchRate_effect$get_sa_exch_rate_pair()
+# o_exchRate_effect$set_sa_start_date(start_date)
+# o_exchRate_effect$set_sa_end_date(end_date)
+# o_exchRate_effect$set_sa_mthly_yearly(freq)
+# o_exchRate_effect$set_dl_dates_investment_value(dat)
+# o_exchRate_effect$multiple_index_exchange_rate_decomposition()
+# o_exchRate_effect$get_full_decomposition()
+
+
