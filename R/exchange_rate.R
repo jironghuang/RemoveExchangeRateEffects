@@ -9,7 +9,6 @@
 #' @param dp_dates_investment_value #data frame of date and investment values
 #' @keywords exchangeRate
 #' @export
-
 exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value){
 
   thisEnv <- environment()
@@ -82,11 +81,6 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
     {
       return(assign("ap_end_date",value,thisEnv))
     },
-
-    # set_ap_freq = function(value)
-    # {
-    #   return(assign("ap_freq",value,thisEnv))
-    # },
 
     set_np_mthly_yearly = function(value)
     {
@@ -171,6 +165,10 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
       return(get("d_exchRate_portfolio", d_exchRate_portfolio, thisEnv))
     },
 
+    #' Full decomposition data frame with all the information
+    #'
+    #' Data frame information includes dates, local value, foregin value, local static value, exchange rate and residuals
+    #' @method get_diff_portfolio_value data.frame
     get_diff_portfolio_value = function(){
 
       if(is.null(d_exchRate_portfolio)){
@@ -199,7 +197,6 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
 #' @param np_number_of_instruments  number of instruments to carry out the exchange rate decomposition
 #' @keywords exchangeRate
 #' @export
-
 multiple_exchange_rate_decomposition = function(np_number_of_instruments){
 
   thisEnv <- environment()
@@ -266,7 +263,10 @@ multiple_exchange_rate_decomposition = function(np_number_of_instruments){
       return(dInstrument)
     },
 
-    #Create lapply version of index_exchange rate decomposition to return list of objects
+    #' List of full decomposition data frames with all the information
+    #'
+    #' Data frame information includes dates, local value, foregin value, local static value, exchange rate and residuals
+    #' @method multiple_index_exchange_rate_decomposition data.frame
     multiple_index_exchange_rate_decomposition = function(){
 
       #Rename methd$index_exchange_rate_decomposition() as a new function

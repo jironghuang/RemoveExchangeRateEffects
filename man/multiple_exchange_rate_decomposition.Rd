@@ -4,7 +4,8 @@
 \alias{multiple_exchange_rate_decomposition}
 \title{This function allows you to do strip out exchange effects (e.g. investment portfolio, revenue) from multiple instruments at a time.}
 \usage{
-multiple_exchange_rate_decomposition(np_number_of_instruments)
+
+  \method{multiple_index_exchange_rate_decomposition}{data.frame}(np_number_of_instruments)
 }
 \arguments{
 \item{np_number_of_instruments}{number of instruments to carry out the exchange rate decomposition}

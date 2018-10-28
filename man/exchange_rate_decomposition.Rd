@@ -4,8 +4,8 @@
 \alias{exchange_rate_decomposition}
 \title{Decompostion into exchange rate and non exchange rate effect}
 \usage{
-exchange_rate_decomposition(sp_exch_rate_pair, ap_start_date, ap_end_date,
-  np_mthly_yearly, dp_dates_investment_value)
+\method{get_diff_portfolio_value}{data.frame}(sp_exch_rate_pair,
+  ap_start_date, ap_end_date, np_mthly_yearly, dp_dates_investment_value)
 }
 \arguments{
 \item{sp_exch_rate_pair}{exchange rate pair. e.g "USDSGD=X". "<Foreign_currency><local_currency>=X"}
