@@ -194,7 +194,9 @@ exchange_rate_decomposition <- function(sp_exch_rate_pair, ap_start_date, ap_end
 
 ###############################################Multiple exchange rate decomposition at once##########################33
 #Decomposing multiple instruments at once using lapply
-#' @param np_number_of_instruments  number of instruments in a portfolio
+#'
+#' This function allows you to do strip out exchange effects (e.g. investment portfolio, revenue) from multiple instruments at a time.
+#' @param np_number_of_instruments  number of instruments to carry out the exchange rate decomposition
 #' @keywords exchangeRate
 #' @export
 
@@ -291,16 +293,14 @@ multiple_exchange_rate_decomposition = function(np_number_of_instruments){
 }
 
 
-# data(instrument)
+# data(eg_dat)
 #
 # er = c("USDSGD=X", "GBPSGD=X")
 # start_date = c("2017-10-01", "2017-10-01")
 # end_date = c("2020-10-01", "2020-10-01")
 # freq = c("monthly", "monthly")
-# dat = list(tsla, tsla)
+# dat = list(eg_dat, eg_dat)
 #
-# a = index_exchange_rate_decomposition(1,1,1,1,1)
-# a$get_portfolio()
 #
 # o_exchRate_effect <- multiple_exchange_rate_decomposition(2)
 # o_exchRate_effect$set_sa_exch_rate_pair(er)
@@ -309,7 +309,6 @@ multiple_exchange_rate_decomposition = function(np_number_of_instruments){
 # o_exchRate_effect$set_sa_end_date(end_date)
 # o_exchRate_effect$set_sa_mthly_yearly(freq)
 # o_exchRate_effect$set_dl_dates_investment_value(dat)
-# o_exchRate_effect$multiple_index_exchange_rate_decomposition()
 # o_exchRate_effect$get_full_decomposition()
 
 
